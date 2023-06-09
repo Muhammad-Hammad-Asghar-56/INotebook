@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../img/logo.png';
 import backgroundImg from '..//img/background.jpg';
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import {  Link} from "react-router-dom";
 
 const signUp = () => {
   return (
@@ -56,9 +56,9 @@ const signUp = () => {
                   Password
                 </label>
                 <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                  <Link to="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
                     View Password
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-2">

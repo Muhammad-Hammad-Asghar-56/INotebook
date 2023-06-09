@@ -8,7 +8,7 @@ app.use(express.json())
 const port=3000;
 
 app.use('/user/auth',user);
-// app.use('/inotbook',inotbook);
+app.use('/note',inotbook);
 
 
 app.listen(3000,()=> {

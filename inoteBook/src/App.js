@@ -1,24 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState } from 'react';
+import Navbar from './Components/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import SignIn from './Components/SignIn';
+import SignUp from './Components/SignUp';
+import Notes from './Components/Notes';
+import NoteState from './Context/NoteState';
 
 function App() {
+  const [isSignIn,setIsSignIn]=useState(false);
+  const setSignInTrue=()=>{
+    setIsSignIn(true);
+  }
+  console.log(isSignIn);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <>
+    //   <SignIn />
+    //   <SignUp />
+    // </>
+     <div className="App">
+     <NoteState>
+
+      <BrowserRouter>
+        {isSignIn ? <Navbar/>: null}
+        <Routes>
+          <Route exact path={"/"} element={<SignIn setSignIn={setSignInTrue}/>} />
+          <Route exact path={"/SignUp"} element={<SignUp/>} />
+          <Route exact path={"/Home/Notes"} element={<Notes setSignIn={setSignInTrue}/>} />
+        </Routes>
+      </BrowserRouter>
+
+     </NoteState>
+   </div>
   );
 }
 

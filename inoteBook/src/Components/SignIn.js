@@ -1,10 +1,9 @@
 import React from 'react';
-import Form from 'react-bootstrap/Form';
 import logo from '../img/logo.png';
 import backgroundImg from '..//img/background.jpg';
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import {  Link } from "react-router-dom";
 
-const SignIn = () => {
+const SignIn = (props) => {
   return (
     <div
       className='d-flex justify-content-center'
@@ -57,7 +56,7 @@ const SignIn = () => {
             </div>
 
             <div>
-              <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              <button type="submit"  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Sign in
               </button>
             </div>

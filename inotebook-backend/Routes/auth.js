@@ -41,7 +41,6 @@ router.post('/createUser', createUserChecks(body), async (req, res) => {
     const sentData = {
       user: userDetails.id
     }
-    console.log("IN");
     var token = await jwt.sign(sentData, JWT_Sceret);
     userDetails.save();
     res.status(200).json({ authToken: token })

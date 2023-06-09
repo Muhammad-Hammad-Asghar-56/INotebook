@@ -1,7 +1,26 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  margin: 0,0,0,0;
+  padding: 0,0,0,0;
 }
 
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+h1{
+  font-size: 2rem !important;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+h2{ 
+  font-size: 1.5rem !important;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+div{
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
