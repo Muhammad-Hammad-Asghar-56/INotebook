@@ -1,70 +1,197 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Backend API Documentation
 
-## Available Scripts
+This documentation provides details about the backend API endpoints for user authentication and note management.
 
-In the project directory, you can run:
+## User Authentication
 
-### `npm start`
+This section provides details about the user authentication endpoints for user registration, login, and retrieving user details.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Create User
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Endpoint**: `/user/auth/createUser`
+**Method**: `POST`
+**Required Authorization**: No
 
-### `npm test`
+#### Request Body
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Field       | Type   | Description         |
+| ----------- | ------ | ------------------- |
+| `name`      | string | User's name         |
+| `email`     | string | User's email address |
+| `password`  | string | User's password     |
 
-### `npm run build`
+#### Response
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Status: 200 OK
+- Body: JSON object containing the authentication token (`authToken`).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Exceptions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Status: 400 Bad Request
+  Body: JSON object containing the error details.
+- Status: 500 Internal Server Error
+  Body: JSON object containing the error details.
 
-### `npm run eject`
+### Login
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Endpoint**: `/user/auth/login`
+**Method**: `POST`
+**Required Authorization**: No
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Request Body
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Field       | Type   | Description         |
+| ----------- | ------ | ------------------- |
+| `email`     | string | User's email address |
+| `password`  | string | User's password     |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Response
 
-## Learn More
+- Status: 200 OK
+- Body: JSON object containing the authentication token (`authToken`).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Exceptions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Status: 400 Bad Request
+  Body: JSON object containing the error details.
+- Status: 500 Internal Server Error
+  Body: JSON object containing the error details.
 
-### Code Splitting
+### Get User Details
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Endpoint**: `/user/auth/getUser`
+**Method**: `POST`
+**Required Authorization**: Yes
 
-### Analyzing the Bundle Size
+#### Response
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Status: 200 OK
+- Body: JSON object containing the user details.
 
-### Making a Progressive Web App
+#### Exceptions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Status: 500 Internal Server Error
+  Body: JSON object containing the error details.
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Note Management
 
-### Deployment
+This section provides details about the endpoints for managing notes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Add New Note
 
-### `npm run build` fails to minify
+**Endpoint**: `/note/addNote`
+**Method**: `POST`
+**Required Authorization**: Yes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Request Body
+
+| Field       | Type   | Description       |
+| ----------- | ------ | ----------------- |
+| `title`     | string | Title of the note |
+| `description` | string | Description of the note |
+| `tag`       | string | Tag for categorizing the note |
+
+#### Response
+
+- Status: 200 OK
+- Body: JSON object containing the details of the added note.
+
+#### Exceptions
+
+- Status: 500 Internal Server Error
+  Body: JSON object containing the error details.
+
+### Get All Notes
+
+**Endpoint**: `/note/getNotes`
+**Method**: `GET`
+**Required Authorization**: Yes
+
+#### Response
+
+- Status: 200 OK
+- Body: JSON array containing all the notes of the user.
+
+#### Exceptions
+
+- Status: 500 Internal Server Error
+  Body: JSON object containing the error details.
+
+### Delete a Note
+
+**Endpoint**: `/note/deleteNote/:noteID`
+**Method**: `DELETE`
+**Required Authorization**: Yes
+
+#### Path Parameters
+
+| Parameter | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+| `noteID`  | string | ID of the note to be deleted |
+
+#### Response
+
+- Status: 200 OK
+- Body: JSON object with the title indicating the successful deletion.
+
+#### Exceptions
+
+- Status: 500 Internal Server Error
+  Body: JSON object containing the error details.
+
+### Update a Note
+
+**Endpoint**: `/note/updateNoteOnID/:noteID`
+**Method**: `PUT`
+**Required Authorization**: Yes
+
+#### Path Parameters
+
+| Parameter | Type   | Description                 |
+| --------- | ------ | --------------------------- |
+| `noteID`  | string | ID of the note to be updated |
+
+#### Request Body
+
+| Field       | Type   | Description       |
+| ----------- | ------ | ----------------- |
+| `title`     | string | Updated title     |
+| `description` | string | Updated description |
+| `tag`       | string | Updated tag       |
+
+#### Response
+
+- Status: 200 OK
+- Body: JSON object with the title indicating the successful update and the updated note details.
+
+#### Exceptions
+
+- Status: 401 Unauthorized
+  Body: JSON object indicating access denied.
+- Status: 500 Internal Server Error
+  Body: JSON object containing the error details.
+
+### Get One Note
+
+**Endpoint**: `/note/getNote/:id`
+**Method**: `GET`
+**Required Authorization**: Yes
+
+#### Path Parameters
+
+| Parameter | Type   | Description          |
+| --------- | ------ | -------------------- |
+| `id`      | string | ID of the note to get |
+
+#### Response
+
+- Status: 200 OK
+- Body: JSON array containing the requested note.
+
+#### Exceptions
+
+- Status: 500 Internal Server Error
+  Body: JSON object containing the error details.
+

@@ -80,4 +80,19 @@ router.put('/updateNoteOnID/:noteID', fetchUser, createNotesChecks(body), async 
   // }
 })
 
+
+
+//   ROUTE 5 : Get One Notes of User Details  Endpoint : /note/getNotes required Login
+router.get('/getNote/:id', fetchUser, createNotesChecks(body), async (req, res) => {
+  // check is any errors ocurs 
+  try {
+    const userData = await NoteModel.find({ _id:req.params.id,user: req.user });
+    res.status(200).json(userData);
+
+  }
+  catch (error) {
+    return res.status(500).json({ title: "Something has wrong on the server side", error: error });
+  }
+})
+
 module.exports = router

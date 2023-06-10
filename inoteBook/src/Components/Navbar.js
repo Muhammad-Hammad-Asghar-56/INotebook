@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import AddNewNote from './AddNewNote';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import {  Link} from "react-router-dom";
 import logo from '../img/logo.png'
@@ -15,8 +16,15 @@ const Navbar = () => {
     // { name: 'Projects', href: '#', current: false },
     // { name: 'Calendar', href: '#', current: false },
   ]
+
+  const [open,SetOpen]=useState(false);
+
+  const handleClickEvent=(e)=>{
+    SetOpen(!open); 
+   }
   return (
-    <Disclosure as="nav"  className="bg-gray-800">
+    <>
+    <Disclosure as="nav"  className="bg-gray-800 fixed top-0 left-0 right-0">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -64,6 +72,9 @@ const Navbar = () => {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
+                  as="Link"
+                  to="/Home/NewNote"
+                  onClick={handleClickEvent}
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <strong style={{fontSize:'1.2rem'}}>&#43;</strong> Crete New Note
@@ -92,8 +103,11 @@ const Navbar = () => {
           </Disclosure.Panel>
         </>
       )}
-    </Disclosure>
 
+    </Disclosure>
+      {open && <AddNewNote closeFunc={()=>(SetOpen(false))}/>}
+
+</>
   )
 }
 
