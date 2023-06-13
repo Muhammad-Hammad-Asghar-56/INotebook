@@ -1,4 +1,4 @@
-import react, { Children, useState } from "react";
+import  {  useState } from "react";
 import notesContext from '../Context/notesContext'
 
 const NoteState = (props) => {

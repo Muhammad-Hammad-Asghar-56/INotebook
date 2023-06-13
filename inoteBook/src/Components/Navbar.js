@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 import AddNewNote from './AddNewNote';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import {  Link} from "react-router-dom";
 import logo from '../img/logo.png'
+
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }

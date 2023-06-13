@@ -2,7 +2,8 @@ const express = require('express')
 const connectMongoose = require('./db');
 const user=require('./Routes/auth');
 const inotbook = require('./Routes/notes');
-var cors = require('cors')
+var cors = require('cors');
+const sendMail = require('./sendMail');
 
 
 const app = express()

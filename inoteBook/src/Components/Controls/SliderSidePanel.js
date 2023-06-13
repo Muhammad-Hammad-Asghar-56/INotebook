@@ -1,13 +1,22 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import PropTypes from 'prop-types';
 
-function NoteDetails() {
-  const [open, setOpen] = useState(true)
-
+function SliderSidePanel({ open, onClose, children }) {
+  
+  const handleOutsideClick = (event) => {
+    if (event.target === event.currentTarget) {
+      closeHandling();
+    }
+  }
+  const closeHandling = () => {
+    open(false);
+    onClose(false);
+  }
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+      <Dialog as="div" className="relative z-10" onClose={closeHandling}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -21,7 +30,7 @@ function NoteDetails() {
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden" onClick={handleOutsideClick}>
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
               <Transition.Child
                 as={Fragment}
@@ -46,7 +55,7 @@ function NoteDetails() {
                       <button
                         type="button"
                         className="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
-                        onClick={() => setOpen(false)}
+                        onClick={onClose}
                       >
                         <span className="sr-only">Close panel</span>
                         <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -54,12 +63,7 @@ function NoteDetails() {
                     </div>
                   </Transition.Child>
                   <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                    <div className="px-4 sm:px-6">
-                      <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
-                        Panel title
-                      </Dialog.Title>
-                    </div>
-                    <div className="relative mt-6 flex-1 px-4 sm:px-6">{/* Your content */}</div>
+                    {children}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -71,4 +75,10 @@ function NoteDetails() {
   )
 }
 
-export default NoteDetails
+SliderSidePanel.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  
+}
+export default SliderSidePanel

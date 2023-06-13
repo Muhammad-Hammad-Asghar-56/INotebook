@@ -1,9 +1,16 @@
-import React from 'react'
+import React,{useState} from 'react'
 import logo from '../img/logo.png';
 import backgroundImg from '..//img/background.jpg';
-import {  Link} from "react-router-dom";
 
-const signUp = () => {
+
+const SignUp = () => {
+  const [showPassword,SetShowPassword] = useState(false);
+
+  const togglePasswordShown=()=>{ 
+    console.log("yo");
+    SetShowPassword((prevState)=>(!prevState));
+  }
+
   return (
     <div
       className='d-flex justify-content-center'
@@ -56,13 +63,14 @@ const signUp = () => {
                   Password
                 </label>
                 <div className="text-sm">
-                  <Link to="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    View Password
-                  </Link>
+                  
+                  <button onClick={togglePasswordShown} className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    {showPassword ? "Hide Password" : "View Password"}
+                  </button>
                 </div>
               </div>
               <div className="mt-2">
-                <input id="password" name="password" type="password" autoComplete="current-password" required className=" px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                <input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" required className=" px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
 
@@ -71,7 +79,7 @@ const signUp = () => {
                   Confirm Password
                 </label>  
               <div className="mt-2">
-                <input id="password" name="password" type="password" autoComplete="current-password" required className=" px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                <input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="current-password" required className=" px-4 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
 
@@ -88,5 +96,5 @@ const signUp = () => {
   )
 }
 
-export default signUp
+export default SignUp
 

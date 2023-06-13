@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../img/logo.png';
 import backgroundImg from '..//img/background.jpg';
 import {  Link } from "react-router-dom";
+import UserContext from '../Context/userContext';
 
 const SignIn = (props) => {
+  const context=useContext(UserContext);
+  const  {authenticateUser,} = context;
+
+  const submitAction=async (e)=>{
+    e.preventDefault();
+    await authenticateUser(e.target.email.value,e.target.password.value);
+    // if(localStorage.getItem("authtoken")){
+    //   // setSignIn()
+    // }
+    // await createUser("Hammad",e.target.email.value,e.target.password.value);
+  }
+  
+  
   return (
-    <div
+    <>
+     <div
       className='d-flex justify-content-center'
       style={{
         width: '100%',
@@ -29,7 +44,7 @@ const SignIn = (props) => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="" method="POST">
+          <form className="space-y-6"  onSubmit={submitAction}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -71,6 +86,8 @@ const SignIn = (props) => {
         </div>
       </div>
     </div>
+    </>
+   
   )
 }
 
